@@ -194,10 +194,6 @@ testing.sety<-testing.set[,4]
 SVMw<-SVM(training.set[,1:3],training.set[,4])
 SVMtest(testing.setx,testing.sety,SVMw)
 
-w = c(0,0,0)
-
-
-PLAw<-PLA(training.set,w)
 
 
 
