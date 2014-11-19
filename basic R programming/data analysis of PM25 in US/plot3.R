@@ -1,0 +1,11 @@
+setwd("C:/Users/commander shepard/Documents/R")
+library("ggplot2")
+NEI <- readRDS("course_project_2/summarySCC_PM25.rds")
+SCC <- readRDS("course_project_2/Source_Classification_Code.rds")
+MARYLAND<-NEI[NEI$fips == "24510",]
+summary<-aggregate(MARYLAND$Emissions, by=list(MARYLAND$type,MARYLAND$year),sum)
+summary$Group.1<-factor(summary$Group.1,levels=c("NON-ROAD","ON-ROAD","NONPOINT","POINT"))
+png("plot3.png",width=640,height=480)
+g<-ggplot(summary,aes(Group.2,x))
+g+geom_line()+geom_point()+facet_wrap(~ Group.1, ncol=2)+labs(x="year")+labs(y="Emissions of PM2.5(Tons)")+labs(title="emission of PM2.5 on 1999,2002, 05 and 08 from 4 sources for Baltimore City")+scale_x_continuous(breaks=c(1999,2002,2005,2008))
+dev.off()
